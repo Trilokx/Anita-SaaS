@@ -521,7 +521,7 @@ export default function App() {
                     <MessageCircle size={18}/> WhatsApp Us
                   </button>
                 </li>
-                <li className="flex items-center gap-2"><Globe size={18}/> Amsterdam, NL</li>
+                <li className="flex items-center gap-2"><Globe size={18}/> Dubai, UAE</li>
               </ul>
             </div>
           </div>
