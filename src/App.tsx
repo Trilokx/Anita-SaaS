@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  Globe, 
-  Star, 
-  MessageSquare, 
-  Megaphone, 
+import {
+  Globe,
+  Star,
+  MessageSquare,
+  Megaphone,
   PhoneCall,
   BarChart3,
   Menu,
@@ -13,14 +13,40 @@ import {
   MessageCircle,
   Mail,
   CheckCircle2,
-  PlayCircle,
   ArrowRight,
-  Loader2
+  Loader2,
+  Calendar
 } from 'lucide-react';
+
+// Config — Anita vult hier haar eigen waarden in
+const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || '31612345678';
+const CALENDLY_URL = import.meta.env.VITE_CALENDLY_URL || 'https://calendly.com/anita-elevate/consult';
+
+declare global {
+  interface Window {
+    Calendly?: {
+      initPopupWidget: (options: { url: string }) => void;
+    };
+  }
+}
+
+function openCalendly() {
+  if (window.Calendly) {
+    window.Calendly.initPopupWidget({ url: CALENDLY_URL });
+  } else {
+    window.open(CALENDLY_URL, '_blank');
+  }
+}
+
+function openWhatsApp(message = 'Hallo! Ik ben geïnteresseerd in de diensten van Elevate.') {
+  const encoded = encodeURIComponent(message);
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`, '_blank');
+}
 
 export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [auditBusiness, setAuditBusiness] = useState('');
   const [chatMessage, setChatMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [messages, setMessages] = useState([
@@ -89,9 +115,11 @@ export default function App() {
             </div>
 
             <div className="hidden md:flex items-center gap-4">
-              <a href="#login" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">Log in</a>
-              <button className="bg-transparent border-2 border-brand text-brand hover:bg-brand hover:text-[#050505] px-6 py-2 rounded-full text-sm font-semibold transition-all">
-                Get Started
+              <button
+                onClick={openCalendly}
+                className="bg-transparent border-2 border-brand text-brand hover:bg-brand hover:text-[#050505] px-6 py-2 rounded-full text-sm font-semibold transition-all flex items-center gap-2"
+              >
+                <Calendar size={16} /> Book a Call
               </button>
             </div>
 
@@ -118,11 +146,17 @@ export default function App() {
               <a href="#pricing" className="block text-base font-medium text-gray-300" onClick={() => setIsMobileMenuOpen(false)}>Pricing</a>
               <a href="#audit" className="block text-base font-medium text-gray-300" onClick={() => setIsMobileMenuOpen(false)}>Free Audit</a>
               <div className="pt-4 flex flex-col gap-3">
-                <button className="w-full bg-white/5 text-white px-6 py-3 rounded-full text-sm font-semibold">
-                  Log in
+                <button
+                  onClick={() => { openCalendly(); setIsMobileMenuOpen(false); }}
+                  className="w-full bg-brand text-[#050505] px-6 py-3 rounded-full text-sm font-semibold flex items-center justify-center gap-2"
+                >
+                  <Calendar size={16} /> Book a Call
                 </button>
-                <button className="w-full bg-brand text-[#050505] px-6 py-3 rounded-full text-sm font-semibold">
-                  Get Started
+                <button
+                  onClick={() => { openWhatsApp(); setIsMobileMenuOpen(false); }}
+                  className="w-full bg-white/5 text-white px-6 py-3 rounded-full text-sm font-semibold flex items-center justify-center gap-2"
+                >
+                  <MessageCircle size={16} /> WhatsApp
                 </button>
               </div>
             </motion.div>
@@ -152,12 +186,18 @@ export default function App() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
-                <button className="bg-brand hover:bg-brand-dark text-[#050505] px-8 py-4 rounded-full text-base font-semibold transition-colors flex items-center justify-center gap-2">
-                  Talk to an Expert
+                <button
+                  onClick={openCalendly}
+                  className="bg-brand hover:bg-brand-dark text-[#050505] px-8 py-4 rounded-full text-base font-semibold transition-colors flex items-center justify-center gap-2"
+                >
+                  <Calendar size={20} /> Book a Free Call
                 </button>
-                <button className="bg-transparent hover:bg-white/5 border border-white/10 text-white px-8 py-4 rounded-full text-base font-semibold transition-colors flex items-center justify-center gap-2">
-                  <PlayCircle size={20} className="text-brand" />
-                  Watch Video
+                <button
+                  onClick={() => openWhatsApp('Hallo! Ik wil graag meer weten over jullie diensten.')}
+                  className="bg-transparent hover:bg-white/5 border border-white/10 text-white px-8 py-4 rounded-full text-base font-semibold transition-colors flex items-center justify-center gap-2"
+                >
+                  <MessageCircle size={20} className="text-brand" />
+                  WhatsApp Us
                 </button>
               </div>
 
@@ -343,13 +383,22 @@ export default function App() {
               </div>
 
               <div className="flex gap-4 relative z-10">
-                <button className="flex-1 bg-[#1A1A1A] hover:bg-[#222] border border-white/5 py-4 rounded-2xl text-sm font-semibold transition-colors flex items-center justify-center gap-2">
+                <button
+                  onClick={openCalendly}
+                  className="flex-1 bg-[#1A1A1A] hover:bg-[#222] border border-white/5 py-4 rounded-2xl text-sm font-semibold transition-colors flex items-center justify-center gap-2"
+                >
                   <PhoneCall size={16} className="text-brand" /> Consult
                 </button>
-                <button className="flex-1 bg-[#1A1A1A] hover:bg-[#222] border border-white/5 py-4 rounded-2xl text-sm font-semibold transition-colors flex items-center justify-center gap-2">
+                <button
+                  onClick={() => openWhatsApp('Hallo! Ik wil graag meer informatie over jullie diensten en prijzen.')}
+                  className="flex-1 bg-[#1A1A1A] hover:bg-[#222] border border-white/5 py-4 rounded-2xl text-sm font-semibold transition-colors flex items-center justify-center gap-2"
+                >
                   <MessageSquare size={16} className="text-brand" /> Request
                 </button>
-                <button className="w-14 bg-brand text-[#050505] rounded-2xl flex items-center justify-center hover:bg-brand-dark transition-colors">
+                <button
+                  onClick={openCalendly}
+                  className="w-14 bg-brand text-[#050505] rounded-2xl flex items-center justify-center hover:bg-brand-dark transition-colors"
+                >
                   <ArrowRight size={20} />
                 </button>
               </div>
@@ -408,14 +457,28 @@ export default function App() {
             Enter your business name or URL. We'll analyze your digital presence and send you a custom report within 24 hours. Try it free, no strings attached.
           </p>
           
-          <form className="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto" onSubmit={(e) => e.preventDefault()}>
-            <input 
-              type="text" 
-              placeholder="Your business name or URL..." 
+          <form
+            className="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto"
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (!auditBusiness.trim()) return;
+              openWhatsApp(`Hallo! Ik wil graag een gratis audit aanvragen voor: ${auditBusiness.trim()}`);
+              setAuditBusiness('');
+            }}
+          >
+            <input
+              type="text"
+              value={auditBusiness}
+              onChange={(e) => setAuditBusiness(e.target.value)}
+              placeholder="Your business name or URL..."
               className="flex-1 px-6 py-4 bg-[#111] border border-white/10 rounded-full focus:border-brand focus:ring-1 focus:ring-brand text-white placeholder:text-gray-500 outline-none transition-all"
               required
             />
-            <button type="submit" className="bg-brand text-[#050505] px-8 py-4 rounded-full text-sm font-semibold hover:bg-brand-dark transition-colors whitespace-nowrap">
+            <button
+              type="submit"
+              disabled={!auditBusiness.trim()}
+              className="bg-brand text-[#050505] px-8 py-4 rounded-full text-sm font-semibold hover:bg-brand-dark transition-colors whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
+            >
               Get Free Audit
             </button>
           </form>
@@ -450,7 +513,14 @@ export default function App() {
               <h4 className="font-bold text-white mb-6">Contact</h4>
               <ul className="space-y-4 text-gray-400 font-medium">
                 <li><a href="mailto:hello@elevatedigital.com" className="hover:text-brand transition-colors flex items-center gap-2"><Mail size={18}/> hello@elevatedigital.com</a></li>
-                <li><a href="https://wa.me/31612345678" target="_blank" rel="noreferrer" className="hover:text-brand transition-colors flex items-center gap-2"><MessageCircle size={18}/> WhatsApp Us</a></li>
+                <li>
+                  <button
+                    onClick={() => openWhatsApp('Hallo! Ik heb een vraag over de diensten van Elevate.')}
+                    className="hover:text-brand transition-colors flex items-center gap-2"
+                  >
+                    <MessageCircle size={18}/> WhatsApp Us
+                  </button>
+                </li>
                 <li className="flex items-center gap-2"><Globe size={18}/> Amsterdam, NL</li>
               </ul>
             </div>
@@ -489,9 +559,12 @@ export default function App() {
 
               {/* Quick Contact Links */}
               <div className="bg-[#0A0A0A] p-3 border-b border-white/5 flex justify-center gap-4">
-                <a href="https://wa.me/31612345678" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-xs font-bold text-gray-300 hover:text-brand transition-colors bg-[#111] px-3 py-1.5 rounded-full shadow-sm border border-white/5">
+                <button
+                  onClick={() => openWhatsApp('Hallo! Ik wil graag direct contact opnemen met Elevate.')}
+                  className="flex items-center gap-2 text-xs font-bold text-gray-300 hover:text-brand transition-colors bg-[#111] px-3 py-1.5 rounded-full shadow-sm border border-white/5"
+                >
                   <MessageCircle size={14} /> WhatsApp
-                </a>
+                </button>
                 <a href="mailto:hello@elevatedigital.com" className="flex items-center gap-2 text-xs font-bold text-gray-300 hover:text-brand transition-colors bg-[#111] px-3 py-1.5 rounded-full shadow-sm border border-white/5">
                   <Mail size={14} /> Email
                 </a>
