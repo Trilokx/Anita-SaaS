@@ -11,7 +11,6 @@ import {
   X,
   Send,
   MessageCircle,
-  Mail,
   CheckCircle2,
   ArrowRight,
   Loader2,
@@ -512,7 +511,6 @@ export default function App() {
             <div>
               <h4 className="font-bold text-white mb-6">Contact</h4>
               <ul className="space-y-4 text-gray-400 font-medium">
-                <li><a href="mailto:hello@elevatedigital.com" className="hover:text-brand transition-colors flex items-center gap-2"><Mail size={18}/> hello@elevatedigital.com</a></li>
                 <li>
                   <button
                     onClick={() => openWhatsApp('Hallo! Ik heb een vraag over de diensten van Elevate.')}
@@ -565,9 +563,12 @@ export default function App() {
                 >
                   <MessageCircle size={14} /> WhatsApp
                 </button>
-                <a href="mailto:hello@elevatedigital.com" className="flex items-center gap-2 text-xs font-bold text-gray-300 hover:text-brand transition-colors bg-[#111] px-3 py-1.5 rounded-full shadow-sm border border-white/5">
-                  <Mail size={14} /> Email
-                </a>
+                <button
+                  onClick={openCalendly}
+                  className="flex items-center gap-2 text-xs font-bold text-gray-300 hover:text-brand transition-colors bg-[#111] px-3 py-1.5 rounded-full shadow-sm border border-white/5"
+                >
+                  <Calendar size={14} /> Book a Call
+                </button>
               </div>
 
               {/* Chat Messages */}
