@@ -110,7 +110,7 @@ export default function App() {
             <div className="hidden md:flex items-center gap-8">
               <a href="#features" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Features</a>
               <a href="#how-it-works" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">How it Works</a>
-              <a href="#pricing" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Pricing</a>
+              <a href="#how-it-works" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Pricing</a>
               <a href="#audit" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Free Audit</a>
             </div>
 
@@ -143,7 +143,7 @@ export default function App() {
             >
               <a href="#features" className="block text-base font-medium text-gray-300" onClick={() => setIsMobileMenuOpen(false)}>Features</a>
               <a href="#how-it-works" className="block text-base font-medium text-gray-300" onClick={() => setIsMobileMenuOpen(false)}>How it Works</a>
-              <a href="#pricing" className="block text-base font-medium text-gray-300" onClick={() => setIsMobileMenuOpen(false)}>Pricing</a>
+              <a href="#how-it-works" className="block text-base font-medium text-gray-300" onClick={() => setIsMobileMenuOpen(false)}>Pricing</a>
               <a href="#audit" className="block text-base font-medium text-gray-300" onClick={() => setIsMobileMenuOpen(false)}>Free Audit</a>
               <div className="pt-4 flex flex-col gap-3">
                 <button
@@ -182,7 +182,7 @@ export default function App() {
                 Your Partner in Smarter <span className="text-brand">Digital Growth</span>
               </h1>
               <p className="text-lg text-gray-400 mb-8 leading-relaxed">
-                Take control of your online presence with tools designed to help you attract clients, rank higher, and grow — effortlessly.
+                Take control of your online presence with expert strategies designed to help you attract clients, rank higher, and grow — effortlessly.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
@@ -280,10 +280,10 @@ export default function App() {
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
             <div className="max-w-2xl">
               <div className="inline-block bg-brand/10 text-brand px-4 py-1.5 rounded-full text-sm font-semibold mb-6 border border-brand/20">
-                Features
+                Our Services
               </div>
               <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight">
-                Achieve <span className="text-brand">digital clarity</span> and take control of your future with tools designed to simplify, streamline, and personalize your <span className="text-brand">online marketing</span>.
+                Achieve <span className="text-brand">digital clarity</span> and take control of your future with expertise designed to simplify, streamline, and personalize your <span className="text-brand">online marketing</span>.
               </h2>
             </div>
             <p className="text-gray-500 font-medium text-sm">
@@ -454,7 +454,7 @@ export default function App() {
             Discover Your Growth Potential
           </h2>
           <p className="text-lg text-gray-400 mb-10 max-w-2xl mx-auto">
-            Enter your business name or URL. We'll analyze your digital presence and send you a custom report within 24 hours. Try it free, no strings attached.
+            Enter your business name or URL and we'll personally reach out via WhatsApp to walk you through your growth opportunities. Free, no strings attached.
           </p>
           
           <form
@@ -503,10 +503,10 @@ export default function App() {
             <div>
               <h4 className="font-bold text-white mb-6">Services</h4>
               <ul className="space-y-4 text-gray-400 font-medium">
-                <li><a href="#" className="hover:text-brand transition-colors">Web Design</a></li>
-                <li><a href="#" className="hover:text-brand transition-colors">Google Reviews</a></li>
-                <li><a href="#" className="hover:text-brand transition-colors">Social Media</a></li>
-                <li><a href="#" className="hover:text-brand transition-colors">AI Chatbots</a></li>
+                <li><a href="#features" className="hover:text-brand transition-colors">Web Design</a></li>
+                <li><a href="#features" className="hover:text-brand transition-colors">Google Reviews</a></li>
+                <li><a href="#features" className="hover:text-brand transition-colors">Social Media</a></li>
+                <li><a href="#features" className="hover:text-brand transition-colors">AI Chatbots</a></li>
               </ul>
             </div>
             <div>
