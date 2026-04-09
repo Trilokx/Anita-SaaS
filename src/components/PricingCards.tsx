@@ -136,8 +136,8 @@ export default function PricingCards({ selectedPlanId, onSelectPlan }: Props) {
                 <Sparkles size={12} /> Most Popular
               </div>
             )}
-            {selectedPlanId === plan.id && !plan.highlight && (
-              <div className="absolute top-4 right-4 text-brand">
+            {selectedPlanId === plan.id && (
+              <div className={`absolute top-4 right-4 ${plan.highlight ? 'text-[#050505]' : 'text-brand'}`}>
                 <CheckCircle2 size={20} />
               </div>
             )}
@@ -186,13 +186,15 @@ export default function PricingCards({ selectedPlanId, onSelectPlan }: Props) {
               onClick={() => onSelectPlan(plan)}
               className={`w-full py-4 rounded-2xl font-semibold text-sm flex items-center justify-center gap-2 transition-all ${
                 plan.highlight
-                  ? 'bg-[#050505] text-brand hover:bg-[#111]'
+                  ? selectedPlanId === plan.id
+                    ? 'bg-white/30 text-[#050505]'
+                    : 'bg-[#050505] text-brand hover:bg-[#111]'
                   : selectedPlanId === plan.id
                     ? 'bg-brand/20 text-brand border border-brand/40'
                     : 'bg-brand text-[#050505] hover:bg-[#9DDF00]'
               }`}
             >
-              {selectedPlanId === plan.id && !plan.highlight ? (
+              {selectedPlanId === plan.id ? (
                 <><CheckCircle2 size={16} /> Selected</>
               ) : (
                 <>{plan.cta} <ArrowRight size={16} /></>
