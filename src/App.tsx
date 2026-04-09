@@ -14,8 +14,11 @@ import {
   CheckCircle2,
   ArrowRight,
   Loader2,
-  Calendar
+  Calendar,
+  Play
 } from 'lucide-react';
+import Presentation from './components/Presentation';
+import PricingBuilder from './components/PricingBuilder';
 
 // Config — Anita vult hier haar eigen waarden in
 const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || '31612345678';
@@ -45,6 +48,7 @@ function openWhatsApp(message = 'Hallo! Ik ben geïnteresseerd in de diensten va
 export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isPresentationOpen, setIsPresentationOpen] = useState(false);
   const [auditBusiness, setAuditBusiness] = useState('');
   const [chatMessage, setChatMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -86,7 +90,7 @@ export default function App() {
       console.error("Chat Error:", error);
       setMessages(prev => [...prev, { 
         role: 'ai', 
-        content: 'Sorry, I am having trouble connecting right now. Please try again or contact us via WhatsApp.' 
+        content: 'Sorry, I\'m having trouble connecting right now. For instant help, reach us via WhatsApp — we respond quickly!'
       }]);
     } finally {
       setIsTyping(false);
@@ -108,8 +112,8 @@ export default function App() {
             
             <div className="hidden md:flex items-center gap-8">
               <a href="#features" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Features</a>
+              <a href="#pricing" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Pricing</a>
               <a href="#how-it-works" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">How it Works</a>
-              <a href="#how-it-works" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Pricing</a>
               <a href="#audit" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Free Audit</a>
             </div>
 
@@ -141,8 +145,8 @@ export default function App() {
               className="md:hidden bg-[#0A0A0A] border-b border-white/5 px-4 py-6 space-y-4 shadow-xl"
             >
               <a href="#features" className="block text-base font-medium text-gray-300" onClick={() => setIsMobileMenuOpen(false)}>Features</a>
+              <a href="#pricing" className="block text-base font-medium text-gray-300" onClick={() => setIsMobileMenuOpen(false)}>Pricing</a>
               <a href="#how-it-works" className="block text-base font-medium text-gray-300" onClick={() => setIsMobileMenuOpen(false)}>How it Works</a>
-              <a href="#how-it-works" className="block text-base font-medium text-gray-300" onClick={() => setIsMobileMenuOpen(false)}>Pricing</a>
               <a href="#audit" className="block text-base font-medium text-gray-300" onClick={() => setIsMobileMenuOpen(false)}>Free Audit</a>
               <div className="pt-4 flex flex-col gap-3">
                 <button
@@ -184,7 +188,7 @@ export default function App() {
                 Take control of your online presence with expert strategies designed to help you attract clients, rank higher, and grow — effortlessly.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 mb-12">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-12">
                 <button
                   onClick={openCalendly}
                   className="bg-brand hover:bg-brand-dark text-[#050505] px-8 py-4 rounded-full text-base font-semibold transition-colors flex items-center justify-center gap-2"
@@ -197,6 +201,12 @@ export default function App() {
                 >
                   <MessageCircle size={20} className="text-brand" />
                   WhatsApp Us
+                </button>
+                <button
+                  onClick={() => setIsPresentationOpen(true)}
+                  className="bg-transparent hover:bg-brand/5 border border-brand/30 text-brand px-8 py-4 rounded-full text-base font-semibold transition-colors flex items-center justify-center gap-2"
+                >
+                  <Play size={20} /> Watch Presentation
                 </button>
               </div>
 
@@ -358,8 +368,13 @@ export default function App() {
         </div>
       </section>
 
+      {/* Pricing Section */}
+      <section id="pricing" className="py-24 bg-[#050505]">
+        <PricingBuilder />
+      </section>
+
       {/* How it works / Pricing Section */}
-      <section id="how-it-works" className="py-24 bg-[#050505]">
+      <section id="how-it-works" className="py-24 bg-[#0A0A0A] border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Left side: Dark App UI Mockup */}
@@ -532,6 +547,9 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* Presentation Modal */}
+      <Presentation isOpen={isPresentationOpen} onClose={() => setIsPresentationOpen(false)} />
 
       {/* AI Chatbot Widget */}
       <div className="fixed bottom-6 right-6 z-50">
