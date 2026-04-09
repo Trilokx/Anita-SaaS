@@ -14,11 +14,10 @@ import {
   CheckCircle2,
   ArrowRight,
   Loader2,
-  Calendar,
-  Play
+  Calendar
 } from 'lucide-react';
-import Presentation from './components/Presentation';
-import PricingBuilder from './components/PricingBuilder';
+import PresentationSection from './components/PresentationSection';
+import PricingCards from './components/PricingCards';
 
 // Config — Anita vult hier haar eigen waarden in
 const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || '31612345678';
@@ -48,7 +47,6 @@ function openWhatsApp(message = 'Hallo! Ik ben geïnteresseerd in de diensten va
 export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const [isPresentationOpen, setIsPresentationOpen] = useState(false);
   const [auditBusiness, setAuditBusiness] = useState('');
   const [chatMessage, setChatMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -188,7 +186,7 @@ export default function App() {
                 Take control of your online presence with expert strategies designed to help you attract clients, rank higher, and grow — effortlessly.
               </p>
               
-              <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-12">
+              <div className="flex flex-col sm:flex-row gap-4 mb-12">
                 <button
                   onClick={openCalendly}
                   className="bg-brand hover:bg-brand-dark text-[#050505] px-8 py-4 rounded-full text-base font-semibold transition-colors flex items-center justify-center gap-2"
@@ -201,12 +199,6 @@ export default function App() {
                 >
                   <MessageCircle size={20} className="text-brand" />
                   WhatsApp Us
-                </button>
-                <button
-                  onClick={() => setIsPresentationOpen(true)}
-                  className="bg-transparent hover:bg-brand/5 border border-brand/30 text-brand px-8 py-4 rounded-full text-base font-semibold transition-colors flex items-center justify-center gap-2"
-                >
-                  <Play size={20} /> Watch Presentation
                 </button>
               </div>
 
@@ -283,21 +275,19 @@ export default function App() {
         </div>
       </section>
 
+      {/* Presentation Section */}
+      <PresentationSection />
+
       {/* Features Section */}
       <section id="features" className="py-24 bg-[#0A0A0A] border-y border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-            <div className="max-w-2xl">
-              <div className="inline-block bg-brand/10 text-brand px-4 py-1.5 rounded-full text-sm font-semibold mb-6 border border-brand/20">
-                Our Services
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight">
-                Achieve <span className="text-brand">digital clarity</span> and take control of your future with expertise designed to simplify, streamline, and personalize your <span className="text-brand">online marketing</span>.
-              </h2>
+          <div className="text-center mb-16">
+            <div className="inline-block bg-brand/10 text-brand px-4 py-1.5 rounded-full text-sm font-semibold mb-6 border border-brand/20">
+              Our Services
             </div>
-            <p className="text-gray-500 font-medium text-sm">
-              Everything you need. Nothing you don't.
-            </p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight max-w-2xl mx-auto">
+              Achieve <span className="text-brand">digital clarity</span> and take control of your future with expertise designed to simplify, streamline, and personalize your <span className="text-brand">online marketing</span>.
+            </h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -370,12 +360,17 @@ export default function App() {
 
       {/* Pricing Section */}
       <section id="pricing" className="py-24 bg-[#050505]">
-        <PricingBuilder />
+        <PricingCards />
       </section>
 
-      {/* How it works / Pricing Section */}
+      {/* How it works Section */}
       <section id="how-it-works" className="py-24 bg-[#0A0A0A] border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-block bg-brand/10 text-brand px-4 py-1.5 rounded-full text-sm font-semibold mb-4 border border-brand/20">
+              How it Works
+            </div>
+          </div>
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Left side: Dark App UI Mockup */}
             <div className="bg-[#111] rounded-[2.5rem] p-8 shadow-2xl border border-white/5 text-white relative overflow-hidden">
@@ -547,9 +542,6 @@ export default function App() {
           </div>
         </div>
       </footer>
-
-      {/* Presentation Modal */}
-      <Presentation isOpen={isPresentationOpen} onClose={() => setIsPresentationOpen(false)} />
 
       {/* AI Chatbot Widget */}
       <div className="fixed bottom-6 right-6 z-50">

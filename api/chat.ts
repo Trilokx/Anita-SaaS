@@ -15,20 +15,28 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-    const formattedMessages = messages.map((m: { role: string; content: string }) => ({
-      role: m.role === 'ai' ? 'model' : 'user',
-      parts: [{ text: m.content }]
-    }));
+    // Gemini requires conversation to start with 'user' role.
+    // Filter out any leading AI/model messages (the initial greeting lives in the UI only).
+    const formatted = messages
+      .map((m: { role: string; content: string }) => ({
+        role: m.role === 'ai' ? 'model' : 'user',
+        parts: [{ text: m.content }]
+      }));
+
+    // Drop leading model messages so the first entry is always 'user'
+    const firstUserIdx = formatted.findIndex((m: { role: string }) => m.role === 'user');
+    const contents = firstUserIdx >= 0 ? formatted.slice(firstUserIdx) : formatted;
 
     const response = await ai.models.generateContent({
-      model: 'gemini-2.0-flash',
-      contents: formattedMessages,
+      model: 'gemini-2.5-flash',
+      contents,
       config: {
         systemInstruction: "You are Elevate AI, a helpful assistant for Elevate, a digital growth agency for SMEs. You help answer questions about web design, SEO, social media, and AI chatbots. Be concise, professional, and friendly. Encourage users to book a free consultation or contact via WhatsApp."
       }
     });
 
-    res.json({ reply: response.text });
+    const reply = response.candidates?.[0]?.content?.parts?.[0]?.text ?? response.text ?? '';
+    res.json({ reply });
   } catch (error) {
     console.error("Gemini API Error:", error);
     res.status(500).json({ error: 'Failed to generate response' });
