@@ -17,7 +17,7 @@ import {
   Calendar
 } from 'lucide-react';
 import PresentationSection from './components/PresentationSection';
-import PricingCards from './components/PricingCards';
+import PricingCards, { Plan } from './components/PricingCards';
 
 // Config — Anita vult hier haar eigen waarden in
 const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || '31612345678';
@@ -47,6 +47,7 @@ function openWhatsApp(message = 'Hallo! Ik ben geïnteresseerd in de diensten va
 export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
   const [auditBusiness, setAuditBusiness] = useState('');
   const [chatMessage, setChatMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -360,7 +361,10 @@ export default function App() {
 
       {/* Pricing Section */}
       <section id="pricing" className="py-24 bg-[#050505]">
-        <PricingCards />
+        <PricingCards
+          selectedPlanId={selectedPlan?.id ?? null}
+          onSelectPlan={(plan) => setSelectedPlan(prev => prev?.id === plan.id ? null : plan)}
+        />
       </section>
 
       {/* How it works Section */}
@@ -628,13 +632,59 @@ export default function App() {
         </AnimatePresence>
 
         {/* Chat Toggle Button */}
-        <button 
+        <button
           onClick={() => setIsChatOpen(!isChatOpen)}
           className="w-14 h-14 bg-brand text-[#050505] rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(178,255,5,0.3)] hover:scale-105 transition-transform"
         >
           {isChatOpen ? <X size={24} /> : <MessageSquare size={24} />}
         </button>
       </div>
+
+      {/* Sticky Plan Bar */}
+      <AnimatePresence>
+        {selectedPlan && (
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            transition={{ type: 'spring', damping: 28, stiffness: 220 }}
+            className="fixed bottom-0 left-0 right-0 z-40 bg-[#111]/95 backdrop-blur-md border-t border-white/10 shadow-2xl"
+          >
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4 pr-24 sm:pr-6">
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="w-2 h-2 bg-brand rounded-full animate-pulse shrink-0" />
+                <div className="min-w-0">
+                  <div className="text-xs text-gray-400 font-medium">Selected plan</div>
+                  <div className="font-bold text-white truncate">
+                    {selectedPlan.name}{' '}
+                    <span className="text-brand">${selectedPlan.price.toLocaleString()}<span className="text-xs font-normal text-gray-400">/mo</span></span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  onClick={() => openWhatsApp(selectedPlan.ctaMsg)}
+                  className="hidden sm:flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 text-white px-4 py-2.5 rounded-full text-sm font-semibold transition-colors"
+                >
+                  <MessageCircle size={15} className="text-brand" /> WhatsApp
+                </button>
+                <button
+                  onClick={openCalendly}
+                  className="bg-brand text-[#050505] px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-[#9DDF00] transition-colors flex items-center gap-2 whitespace-nowrap"
+                >
+                  <Calendar size={15} /> Book a Call
+                </button>
+                <button
+                  onClick={() => setSelectedPlan(null)}
+                  className="p-2 text-gray-500 hover:text-white transition-colors"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

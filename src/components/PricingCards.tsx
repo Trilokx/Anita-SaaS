@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Check, MessageCircle, PhoneCall, Sparkles, ArrowRight } from 'lucide-react';
+import { Check, MessageCircle, PhoneCall, Sparkles, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 declare global {
   interface Window {
@@ -22,7 +22,7 @@ function openWhatsApp(msg: string) {
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
-interface Plan {
+export interface Plan {
   id: string;
   name: string;
   tagline: string;
@@ -93,7 +93,12 @@ const PLANS: Plan[] = [
   }
 ];
 
-export default function PricingCards() {
+interface Props {
+  selectedPlanId: string | null;
+  onSelectPlan: (plan: Plan) => void;
+}
+
+export default function PricingCards({ selectedPlanId, onSelectPlan }: Props) {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {/* Section Header */}
@@ -118,15 +123,22 @@ export default function PricingCards() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className={`relative rounded-[2rem] p-8 flex flex-col transition-transform hover:-translate-y-1 ${
+            className={`relative rounded-[2rem] p-8 flex flex-col transition-all hover:-translate-y-1 ${
               plan.highlight
                 ? 'bg-brand text-[#050505] shadow-2xl shadow-brand/20'
-                : 'bg-[#111] text-white border border-white/10 hover:border-brand/20'
+                : selectedPlanId === plan.id
+                  ? 'bg-[#111] text-white border-2 border-brand shadow-lg shadow-brand/10'
+                  : 'bg-[#111] text-white border border-white/10 hover:border-brand/20'
             }`}
           >
             {plan.highlight && (
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#050505] text-brand border border-brand/30 text-xs font-bold px-4 py-1.5 rounded-full flex items-center gap-1.5 whitespace-nowrap">
                 <Sparkles size={12} /> Most Popular
+              </div>
+            )}
+            {selectedPlanId === plan.id && !plan.highlight && (
+              <div className="absolute top-4 right-4 text-brand">
+                <CheckCircle2 size={20} />
               </div>
             )}
 
@@ -171,14 +183,20 @@ export default function PricingCards() {
 
             {/* CTA */}
             <button
-              onClick={() => openWhatsApp(plan.ctaMsg)}
+              onClick={() => onSelectPlan(plan)}
               className={`w-full py-4 rounded-2xl font-semibold text-sm flex items-center justify-center gap-2 transition-all ${
                 plan.highlight
                   ? 'bg-[#050505] text-brand hover:bg-[#111]'
-                  : 'bg-brand text-[#050505] hover:bg-[#9DDF00]'
+                  : selectedPlanId === plan.id
+                    ? 'bg-brand/20 text-brand border border-brand/40'
+                    : 'bg-brand text-[#050505] hover:bg-[#9DDF00]'
               }`}
             >
-              {plan.cta} <ArrowRight size={16} />
+              {selectedPlanId === plan.id && !plan.highlight ? (
+                <><CheckCircle2 size={16} /> Selected</>
+              ) : (
+                <>{plan.cta} <ArrowRight size={16} /></>
+              )}
             </button>
           </motion.div>
         ))}
