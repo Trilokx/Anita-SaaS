@@ -15,6 +15,7 @@ import {
   Loader2,
   Calendar
 } from 'lucide-react';
+import PresentationSection from './components/PresentationSection';
 import PricingCards, { Plan } from './components/PricingCards';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -196,6 +197,9 @@ export default function App() {
 
       {/* Credibility Bar */}
       <CredibilityBar />
+
+      {/* Presentation Section */}
+      <PresentationSection />
 
       {/* Features Section */}
       <section id="features" className="py-24 bg-[#0A0A0A] border-y border-white/5">
