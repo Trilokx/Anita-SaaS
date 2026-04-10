@@ -83,14 +83,32 @@ Open [http://localhost:3000](http://localhost:3000).
 ```
 Anita-SaaS/
 ├── src/
-│   ├── App.tsx          # Entire landing page (single-page app)
-│   └── index.css        # Tailwind theme + brand colors
+│   ├── App.tsx              # Main landing page
+│   ├── index.css            # Tailwind theme + brand colors
+│   ├── components/
+│   │   ├── Navbar.tsx       # Navigation header
+│   │   ├── Footer.tsx       # Footer with contact info
+│   │   ├── PricingCards.tsx  # Pricing plans (Founding Client pricing)
+│   │   ├── CredibilityBar.tsx # Trust signals bar
+│   │   └── PresentationSection.tsx # 11-slide narrated presentation
+│   ├── pages/
+│   │   ├── AboutPage.tsx    # About Us
+│   │   ├── PrivacyPage.tsx  # Privacy Policy
+│   │   └── TermsPage.tsx    # Terms of Service
+│   ├── data/
+│   │   ├── slides.ts        # Slide content
+│   │   └── pricing.ts       # Service tier definitions
+│   └── lib/
+│       └── contact.ts       # WhatsApp + Calendly helpers
 ├── api/
-│   └── chat.ts          # Vercel serverless function (Gemini chatbot)
-├── server.ts            # Express dev server (Vite middleware + API)
-├── index.html           # HTML entry point + Calendly scripts
-├── vercel.json          # Vercel build config
-└── .env.example         # Environment variable template
+│   └── chat.ts              # Vercel serverless (Gemini chatbot)
+├── public/
+│   ├── audio/               # Slide narration audio files
+│   └── images/              # Brand assets (Google Certified badge)
+├── server.ts                # Express dev server
+├── index.html               # HTML entry + Calendly scripts
+├── vercel.json              # Vercel build config
+└── .env.example             # Environment variable template
 ```
 
 ---
@@ -125,11 +143,11 @@ Push to `main` — Vercel auto-deploys via GitHub integration.
 
 ## Customisation
 
-All contact config is at the top of `src/App.tsx`:
+All contact config is in `src/lib/contact.ts`:
 
 ```ts
-const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || '31612345678';
-const CALENDLY_URL    = import.meta.env.VITE_CALENDLY_URL    || 'https://calendly.com/anita-elevate/consult';
+export const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || '971525510676';
+export const CALENDLY_URL    = import.meta.env.VITE_CALENDLY_URL    || 'https://calendly.com/anita-elevate/consult';
 ```
 
 Brand color is defined in `src/index.css`:

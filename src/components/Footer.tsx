@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { MessageCircle, Globe } from 'lucide-react';
+import { MessageCircle, Globe, Phone } from 'lucide-react';
 import { openWhatsApp } from '../lib/contact';
 
 export default function Footer() {
@@ -32,11 +32,16 @@ export default function Footer() {
             <ul className="space-y-4 text-gray-400 font-medium">
               <li>
                 <button
-                  onClick={() => openWhatsApp('Hallo! Ik heb een vraag over de diensten van Elevate.')}
+                  onClick={() => openWhatsApp("Hi! I have a question about Elevate's services.")}
                   className="hover:text-brand transition-colors flex items-center gap-2"
                 >
                   <MessageCircle size={18} /> WhatsApp Us
                 </button>
+              </li>
+              <li>
+                <a href="tel:+971525510676" className="hover:text-brand transition-colors flex items-center gap-2">
+                  <Phone size={18} /> +971 52 551 0676
+                </a>
               </li>
               <li className="flex items-center gap-2"><Globe size={18} /> Dubai, UAE</li>
             </ul>

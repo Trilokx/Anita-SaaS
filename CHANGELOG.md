@@ -4,6 +4,34 @@ All notable changes to this project are documented here.
 
 ---
 
+## [2.0.0] — 2026-04-10 — Strategic Landing Page Overhaul
+
+### Added
+- Phone number (+971 52 551 0676) in navbar (desktop) and footer
+- Founding Client pricing: 50% off for first 3 months with strikethrough original prices
+- Credibility bar between hero and presentation section (trust signals)
+- 30-day money-back guarantee in pricing section
+- Google Certified badge on About page
+- "Example Dashboard" label on hero metric to clarify it's a mockup
+
+### Changed
+- WhatsApp number updated from NL (+31 615180250) to UAE (+971 525510676)
+- All Dutch WhatsApp messages translated to English
+- Hero tagline: "We Build Your Digital Presence — You Focus on Your Clients"
+- Hero subtitle made specific to Dubai SMB market
+- Service tag "Acquisition" renamed to "Lead Generation"
+- Pricing restructured: Starter $750/mo, Growth $1,500/mo, Full-Stack $2,500/mo
+- Setup fees reduced 50% across all plans
+- Pricing disclaimer changed from "3-month minimum" to founding client terms
+- README updated with current project structure
+- Bundle pricing in pricing.ts updated proportionally
+
+### Removed
+- Dutch language remnants across entire codebase
+- Hard "3-month minimum" requirement
+
+---
+
 ## [1.3.0] — 2026-04-09
 
 ### Added

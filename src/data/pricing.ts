@@ -134,16 +134,16 @@ export const BUNDLES: BundlePackage[] = [
     id: 'starter',
     name: 'Starter Bundle',
     tagline: 'Perfect for getting started',
-    priceMin: 1500,
-    priceMax: 2500,
+    priceMin: 750,
+    priceMax: 1250,
     selections: { website: 0, social: 0 }
   },
   {
     id: 'growth',
     name: 'Growth Bundle',
     tagline: 'Scale your online presence',
-    priceMin: 3000,
-    priceMax: 5000,
+    priceMin: 1500,
+    priceMax: 2500,
     selections: { website: 1, social: 1, ads: 0 },
     highlight: true
   },
@@ -151,8 +151,8 @@ export const BUNDLES: BundlePackage[] = [
     id: 'fullstack',
     name: 'Full-Stack',
     tagline: 'Everything, fully managed',
-    priceMin: 5000,
-    priceMax: 10000,
+    priceMin: 2500,
+    priceMax: 5000,
     selections: { website: 2, aiChat: 1, social: 2, ads: 1 }
   }
 ];

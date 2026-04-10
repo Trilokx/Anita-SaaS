@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Check, MessageCircle, PhoneCall, Sparkles, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Check, MessageCircle, PhoneCall, Sparkles, ArrowRight, CheckCircle2, Flame } from 'lucide-react';
 
 declare global {
   interface Window {
@@ -27,7 +27,9 @@ export interface Plan {
   name: string;
   tagline: string;
   price: number;
+  originalPrice: number;
   setupFee: number;
+  originalSetupFee: number;
   highlight: boolean;
   features: string[];
   cta: string;
@@ -39,8 +41,10 @@ const PLANS: Plan[] = [
     id: 'starter',
     name: 'Starter Bundle',
     tagline: 'Get your business online and visible',
-    price: 1500,
-    setupFee: 800,
+    price: 750,
+    originalPrice: 1500,
+    setupFee: 400,
+    originalSetupFee: 800,
     highlight: false,
     features: [
       'Professional website (up to 5 pages)',
@@ -51,14 +55,16 @@ const PLANS: Plan[] = [
       'WhatsApp & email support',
     ],
     cta: 'Get Started',
-    ctaMsg: "Hi! I'm interested in the Starter Bundle ($1,500/mo). Can we schedule a call to get started?"
+    ctaMsg: "Hi! I'm interested in the Starter Bundle (Founding Client offer). Can we schedule a call to get started?"
   },
   {
     id: 'growth',
     name: 'Growth Bundle',
     tagline: 'Scale your presence and capture more leads',
-    price: 3000,
-    setupFee: 1500,
+    price: 1500,
+    originalPrice: 3000,
+    setupFee: 750,
+    originalSetupFee: 1500,
     highlight: true,
     features: [
       'Standard website + landing pages',
@@ -69,14 +75,16 @@ const PLANS: Plan[] = [
       'Bi-weekly strategy calls',
     ],
     cta: 'Start Growing',
-    ctaMsg: "Hi! I'm interested in the Growth Bundle ($3,000/mo). Can we schedule a call to get started?"
+    ctaMsg: "Hi! I'm interested in the Growth Bundle (Founding Client offer). Can we schedule a call to get started?"
   },
   {
     id: 'fullstack',
     name: 'Full-Stack',
     tagline: 'Your entire digital presence, fully managed',
-    price: 5000,
-    setupFee: 2000,
+    price: 2500,
+    originalPrice: 5000,
+    setupFee: 1000,
+    originalSetupFee: 2000,
     highlight: false,
     features: [
       'Premium website + ongoing redesigns',
@@ -88,7 +96,7 @@ const PLANS: Plan[] = [
       'Weekly reports + priority support',
     ],
     cta: 'Go Full-Stack',
-    ctaMsg: "Hi! I'm interested in the Full-Stack package ($5,000/mo). Can we schedule a call to get started?"
+    ctaMsg: "Hi! I'm interested in the Full-Stack package (Founding Client offer). Can we schedule a call to get started?"
   }
 ];
 
@@ -100,6 +108,23 @@ interface Props {
 export default function PricingCards({ selectedPlanId, onSelectPlan }: Props) {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Founding Client Banner */}
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="bg-brand/10 border border-brand/30 rounded-2xl p-5 mb-10 text-center"
+      >
+        <div className="flex items-center justify-center gap-2 mb-2">
+          <Flame size={20} className="text-brand" />
+          <span className="text-brand font-bold text-lg">Founding Client Offer</span>
+          <Flame size={20} className="text-brand" />
+        </div>
+        <p className="text-gray-300 text-sm max-w-lg mx-auto">
+          50% off for your first 3 months. Limited spots available — be one of our first clients and lock in this exclusive rate.
+        </p>
+      </motion.div>
+
       {/* Section Header */}
       <div className="text-center mb-16">
         <div className="inline-block bg-brand/10 text-brand px-4 py-1.5 rounded-full text-sm font-semibold mb-6 border border-brand/20">
@@ -153,14 +178,22 @@ export default function PricingCards({ selectedPlanId, onSelectPlan }: Props) {
 
             {/* Price */}
             <div className="mb-8">
-              <div className={`text-5xl font-bold mb-1 ${plan.highlight ? 'text-[#050505]' : 'text-white'}`}>
-                ${plan.price.toLocaleString()}
+              <div className={`text-sm line-through mb-1 ${plan.highlight ? 'text-[#050505]/40' : 'text-gray-600'}`}>
+                ${plan.originalPrice.toLocaleString()}/mo
               </div>
-              <div className={`text-sm font-medium ${plan.highlight ? 'text-[#050505]/60' : 'text-gray-500'}`}>
-                per month
+              <div className="flex items-baseline gap-2">
+                <div className={`text-5xl font-bold ${plan.highlight ? 'text-[#050505]' : 'text-white'}`}>
+                  ${plan.price.toLocaleString()}
+                </div>
+                <div className={`text-xs font-bold px-2 py-0.5 rounded-full ${plan.highlight ? 'bg-[#050505]/15 text-[#050505]' : 'bg-brand/10 text-brand'}`}>
+                  50% OFF
+                </div>
+              </div>
+              <div className={`text-sm font-medium mt-1 ${plan.highlight ? 'text-[#050505]/60' : 'text-gray-500'}`}>
+                per month — first 3 months
               </div>
               <div className={`mt-2 text-xs ${plan.highlight ? 'text-[#050505]/50' : 'text-gray-600'}`}>
-                + ${plan.setupFee.toLocaleString()} one-time setup fee
+                + ${plan.setupFee.toLocaleString()} one-time setup fee <span className="line-through">${plan.originalSetupFee.toLocaleString()}</span>
               </div>
             </div>
 
@@ -232,10 +265,15 @@ export default function PricingCards({ selectedPlanId, onSelectPlan }: Props) {
         </div>
       </motion.div>
 
-      {/* Disclaimer */}
-      <p className="text-center text-xs text-gray-600 mt-6">
-        All packages require a 3-month minimum.
-      </p>
+      {/* Risk Reversal */}
+      <div className="text-center mt-8 space-y-2">
+        <p className="text-sm text-gray-300 font-medium">
+          Not satisfied after 30 days? Full refund — no questions asked.
+        </p>
+        <p className="text-xs text-gray-600">
+          Founding Client pricing: 50% off for the first 3 months, then regular rates apply.
+        </p>
+      </div>
     </div>
   );
 }

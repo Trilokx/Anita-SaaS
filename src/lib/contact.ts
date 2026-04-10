@@ -17,7 +17,7 @@ export function openCalendly() {
   }
 }
 
-export function openWhatsApp(message = 'Hallo! Ik ben geïnteresseerd in de diensten van Elevate.') {
+export function openWhatsApp(message = "Hi! I'm interested in Elevate's digital marketing services.") {
   const encoded = encodeURIComponent(message);
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`, '_blank');
 }

@@ -19,6 +19,7 @@ import PresentationSection from './components/PresentationSection';
 import PricingCards, { Plan } from './components/PricingCards';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import CredibilityBar from './components/CredibilityBar';
 import { openCalendly, openWhatsApp } from './lib/contact';
 
 export default function App() {
@@ -91,10 +92,10 @@ export default function App() {
               className="max-w-xl"
             >
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1] mb-6">
-                Your Partner in Smarter <span className="text-brand">Digital Growth</span>
+                We Build Your <span className="text-brand">Digital Presence</span> — You Focus on Your Clients
               </h1>
               <p className="text-lg text-gray-400 mb-8 leading-relaxed">
-                Take control of your online presence with expert strategies designed to help you attract clients, rank higher, and grow — effortlessly.
+                Expert digital marketing for small businesses in Dubai and beyond. We handle your website, Google visibility, social media, and AI automation — so you can focus on what you do best.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
@@ -105,7 +106,7 @@ export default function App() {
                   <Calendar size={20} /> Book a Free Call
                 </button>
                 <button
-                  onClick={() => openWhatsApp('Hallo! Ik wil graag meer weten over jullie diensten.')}
+                  onClick={() => openWhatsApp("Hi! I'd like to learn more about Elevate's digital marketing services.")}
                   className="bg-transparent hover:bg-white/5 border border-white/10 text-white px-8 py-4 rounded-full text-base font-semibold transition-colors flex items-center justify-center gap-2"
                 >
                   <MessageCircle size={20} className="text-brand" />
@@ -114,7 +115,7 @@ export default function App() {
               </div>
 
               <div className="flex flex-wrap gap-3">
-                {['Web Design', 'Google Reviews', 'Social Media', 'AI Chatbots', 'Acquisition'].map((tag) => (
+                {['Web Design', 'Google Reviews', 'Social Media', 'AI Chatbots', 'Lead Generation'].map((tag) => (
                   <span key={tag} className="px-4 py-1.5 rounded-full border border-white/10 text-xs font-medium text-gray-400 bg-white/5">
                     {tag}
                   </span>
@@ -162,9 +163,12 @@ export default function App() {
                   <div className="h-2 w-3/4 bg-[#050505]/10 rounded-full"></div>
                   <div className="h-2 w-1/2 bg-[#050505]/10 rounded-full"></div>
                 </div>
-                <div className="mt-8 pt-6 border-t border-[#050505]/10 flex justify-between items-center">
-                  <div className="text-sm font-medium text-[#050505]/80">New Leads</div>
-                  <div className="text-xl font-bold text-[#050505]">+142%</div>
+                <div className="mt-8 pt-6 border-t border-[#050505]/10">
+                  <div className="text-[10px] uppercase tracking-wider text-[#050505]/40 mb-2">Example Dashboard</div>
+                  <div className="flex justify-between items-center">
+                    <div className="text-sm font-medium text-[#050505]/80">New Leads</div>
+                    <div className="text-xl font-bold text-[#050505]">+142%</div>
+                  </div>
                 </div>
               </motion.div>
 
@@ -190,6 +194,9 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      {/* Credibility Bar */}
+      <CredibilityBar />
 
       {/* Presentation Section */}
       <PresentationSection />
@@ -318,7 +325,7 @@ export default function App() {
                   <PhoneCall size={16} className="text-brand" /> Consult
                 </button>
                 <button
-                  onClick={() => openWhatsApp('Hallo! Ik wil graag meer informatie over jullie diensten en prijzen.')}
+                  onClick={() => openWhatsApp("Hi! I'd like more information about your services and pricing.")}
                   className="flex-1 bg-[#1A1A1A] hover:bg-[#222] border border-white/5 py-4 rounded-2xl text-sm font-semibold transition-colors flex items-center justify-center gap-2"
                 >
                   <MessageSquare size={16} className="text-brand" /> Request
@@ -390,7 +397,7 @@ export default function App() {
             onSubmit={(e) => {
               e.preventDefault();
               if (!auditBusiness.trim()) return;
-              openWhatsApp(`Hallo! Ik wil graag een gratis audit aanvragen voor: ${auditBusiness.trim()}`);
+              openWhatsApp(`Hi! I'd like to request a free audit for: ${auditBusiness.trim()}`);
               setAuditBusiness('');
             }}
           >
@@ -440,7 +447,7 @@ export default function App() {
               {/* Quick Contact Links */}
               <div className="bg-[#0A0A0A] p-3 border-b border-white/5 flex justify-center gap-4">
                 <button
-                  onClick={() => openWhatsApp('Hallo! Ik wil graag direct contact opnemen met Elevate.')}
+                  onClick={() => openWhatsApp("Hi! I'd like to speak with someone from Elevate.")}
                   className="flex items-center gap-2 text-xs font-bold text-gray-300 hover:text-brand transition-colors bg-[#111] px-3 py-1.5 rounded-full shadow-sm border border-white/5"
                 >
                   <MessageCircle size={14} /> WhatsApp
@@ -525,6 +532,7 @@ export default function App() {
                   <div className="text-xs text-gray-400 font-medium">Selected plan</div>
                   <div className="font-bold text-white truncate">
                     {selectedPlan.name}{' '}
+                    <span className="text-gray-500 line-through text-sm">${selectedPlan.originalPrice.toLocaleString()}</span>{' '}
                     <span className="text-brand">${selectedPlan.price.toLocaleString()}<span className="text-xs font-normal text-gray-400">/mo</span></span>
                   </div>
                 </div>

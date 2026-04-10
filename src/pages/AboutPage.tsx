@@ -110,6 +110,9 @@ export default function AboutPage() {
                 Using AI and proven Google strategies, we help businesses grow with clarity, efficiency, and measurable results.
               </p>
             </div>
+            <div className="mt-8">
+              <img src="/images/google-certified.png" alt="Google Certified" className="h-16 object-contain" />
+            </div>
           </section>
 
           {/* CTA */}
@@ -126,7 +129,7 @@ export default function AboutPage() {
                 <Calendar size={18} /> Book a Free Call
               </button>
               <button
-                onClick={() => openWhatsApp('Hallo! Ik heb de About Us pagina gelezen en wil graag meer weten.')}
+                onClick={() => openWhatsApp("Hi! I've read about Elevate and would like to learn more.")}
                 className="bg-transparent border border-white/10 text-white px-8 py-3 rounded-full font-semibold hover:bg-white/5 transition-colors flex items-center justify-center gap-2"
               >
                 <MessageCircle size={18} className="text-brand" /> WhatsApp Us

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { Calendar, MessageCircle, Menu, X } from 'lucide-react';
+import { Calendar, MessageCircle, Menu, X, Phone } from 'lucide-react';
 import { openCalendly, openWhatsApp } from '../lib/contact';
 
 export default function Navbar() {
@@ -27,6 +27,9 @@ export default function Navbar() {
           </div>
 
           <div className="hidden md:flex items-center gap-4">
+            <a href="tel:+971525510676" className="text-sm font-medium text-gray-400 hover:text-brand transition-colors flex items-center gap-1.5">
+              <Phone size={14} /> +971 52 551 0676
+            </a>
             <button
               onClick={openCalendly}
               className="bg-transparent border-2 border-brand text-brand hover:bg-brand hover:text-[#050505] px-6 py-2 rounded-full text-sm font-semibold transition-all flex items-center gap-2"
