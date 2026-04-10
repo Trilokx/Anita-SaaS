@@ -265,15 +265,9 @@ export default function PricingCards({ selectedPlanId, onSelectPlan }: Props) {
         </div>
       </motion.div>
 
-      {/* Risk Reversal */}
-      <div className="text-center mt-8 space-y-2">
-        <p className="text-sm text-gray-300 font-medium">
-          Not satisfied after 30 days? Full refund — no questions asked.
-        </p>
-        <p className="text-xs text-gray-600">
-          Founding Client pricing: 50% off for the first 3 months, then regular rates apply.
-        </p>
-      </div>
+      <p className="text-center text-xs text-gray-600 mt-6">
+        Founding Client pricing: 50% off for the first 3 months, then regular rates apply.
+      </p>
     </div>
   );
 }
