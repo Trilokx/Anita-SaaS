@@ -46,10 +46,10 @@ export default function AboutPage() {
 
           {/* Section 2 — Partnership */}
           <section className="mb-16">
-            <h2 className="text-2xl font-bold text-white mb-6">In Partnership With Velko</h2>
+            <h2 className="text-2xl font-bold text-white mb-6">In Partnership With <a href="https://velko.io/" target="_blank" rel="noopener noreferrer" className="text-brand hover:underline">Velko</a></h2>
             <div className="space-y-5 text-gray-300 leading-relaxed text-base">
               <p>
-                Through my collaboration with Velko, I combine strategic insight with technical execution — ensuring that every solution is not only effective but also scalable and future-proof.
+                Through my collaboration with <a href="https://velko.io/" target="_blank" rel="noopener noreferrer" className="text-brand hover:underline">Velko</a>, I combine strategic insight with technical execution — ensuring that every solution is not only effective but also scalable and future-proof.
               </p>
               <p>
                 This partnership allows us to deliver a complete approach, from visibility to conversion and automation.
