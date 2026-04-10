@@ -51,6 +51,7 @@ export default function Footer() {
           <p>&copy; {new Date().getFullYear()} Elevate. All rights reserved.</p>
           <div className="flex gap-6">
             <Link to="/about" className="hover:text-white transition-colors">About Us</Link>
+            <Link to="/faq" className="hover:text-white transition-colors">FAQ</Link>
             <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
           </div>

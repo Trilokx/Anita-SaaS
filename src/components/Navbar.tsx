@@ -24,6 +24,7 @@ export default function Navbar() {
             <a href="/#how-it-works" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">How it Works</a>
             <a href="/#audit" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">Free Audit</a>
             <Link to="/about" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">About Us</Link>
+            <Link to="/faq" className="text-sm font-medium text-gray-400 hover:text-white transition-colors">FAQ</Link>
           </div>
 
           <div className="hidden md:flex items-center gap-4">
@@ -60,6 +61,7 @@ export default function Navbar() {
             <a href="/#how-it-works" className="block text-base font-medium text-gray-300" onClick={() => setIsMobileMenuOpen(false)}>How it Works</a>
             <a href="/#audit" className="block text-base font-medium text-gray-300" onClick={() => setIsMobileMenuOpen(false)}>Free Audit</a>
             <Link to="/about" className="block text-base font-medium text-gray-300" onClick={() => setIsMobileMenuOpen(false)}>About Us</Link>
+            <Link to="/faq" className="block text-base font-medium text-gray-300" onClick={() => setIsMobileMenuOpen(false)}>FAQ</Link>
             <div className="pt-4 flex flex-col gap-3">
               <button
                 onClick={() => { openCalendly(); setIsMobileMenuOpen(false); }}
