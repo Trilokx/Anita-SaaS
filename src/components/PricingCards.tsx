@@ -67,7 +67,6 @@ const PLANS: Plan[] = [
       'Google Business optimization',
       'Starter ad campaign management',
       'Bi-weekly strategy calls',
-      'Detailed analytics dashboard',
     ],
     cta: 'Start Growing',
     ctaMsg: "Hi! I'm interested in the Growth Bundle ($3,000/mo). Can we schedule a call to get started?"
@@ -81,7 +80,7 @@ const PLANS: Plan[] = [
     highlight: false,
     features: [
       'Premium website + ongoing redesigns',
-      'All social platforms — full management',
+      '3 social media platforms — daily posts',
       'Enterprise AI — multi-channel, CRM sync',
       'Full ad management ($10k+ spend)',
       'Outreach & sales automation',
@@ -235,7 +234,7 @@ export default function PricingCards({ selectedPlanId, onSelectPlan }: Props) {
 
       {/* Disclaimer */}
       <p className="text-center text-xs text-gray-600 mt-6">
-        All packages require a 3-month minimum. Prices are indicative — final pricing confirmed after consultation.
+        All packages require a 3-month minimum.
       </p>
     </div>
   );

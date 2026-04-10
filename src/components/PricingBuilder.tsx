@@ -361,7 +361,7 @@ export default function PricingBuilder() {
             </div>
 
             <p className="text-center text-xs text-gray-600 mt-4">
-              Prices are indicative. Final pricing after consultation.
+              All packages require a 3-month minimum.
             </p>
           </div>
         </div>
